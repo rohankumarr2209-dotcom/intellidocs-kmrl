@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Train, FileText, Brain, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/metro-hero-bg.jpg";
+import kmrlLogo from "@/assets/kmrl-logo.png";
 
 const Landing = () => {
   return (
@@ -11,8 +12,8 @@ const Landing = () => {
       <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gradient-primary">
-              <Train className="h-6 w-6 text-white" />
+            <div className="p-2 rounded-lg bg-white">
+              <img src={kmrlLogo} alt="KMRL Logo" className="h-6 w-auto" />
             </div>
             <div>
               <h1 className="text-xl font-bold text-foreground">IntelliDocs AI</h1>
@@ -146,8 +147,8 @@ const Landing = () => {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center gap-3 mb-4 md:mb-0">
-              <div className="p-2 rounded-lg bg-gradient-primary">
-                <Train className="h-5 w-5 text-white" />
+              <div className="p-2 rounded-lg bg-white">
+                <img src={kmrlLogo} alt="KMRL Logo" className="h-5 w-auto" />
               </div>
               <div>
                 <div className="font-semibold">IntelliDocs AI</div>
