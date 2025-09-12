@@ -34,8 +34,11 @@ const Landing = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background to-muted/50 py-20">
         <div 
-          className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImage})` }}
+          className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat animate-pulse"
+          style={{ 
+            backgroundImage: `url(${heroImage})`,
+            animation: 'float 6s ease-in-out infinite'
+          }}
         />
         <div className="relative container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">

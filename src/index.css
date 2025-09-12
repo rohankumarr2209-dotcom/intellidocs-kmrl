@@ -154,3 +154,24 @@ All colors MUST be HSL for proper theming support.
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom animations for dynamic effects */
+@keyframes float {
+  0%, 100% {
+    transform: scale(1) translateY(0px);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.02) translateY(-5px);
+    opacity: 0.15;
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.08;
+  }
+  50% {
+    opacity: 0.12;
+  }
+}
