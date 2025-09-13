@@ -87,45 +87,53 @@ const Landing = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card variant="elevated" className="text-center p-6">
-              <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Brain className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-semibold mb-2">AI Summarization</h3>
-              <p className="text-sm text-muted-foreground">
-                Instantly generate intelligent summaries of complex documents
-              </p>
-            </Card>
+            <Link to="/login">
+              <Card variant="elevated" className="text-center p-6 hover:scale-105 transition-transform cursor-pointer">
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Brain className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-semibold mb-2">AI Summarization</h3>
+                <p className="text-sm text-muted-foreground">
+                  Instantly generate intelligent summaries of complex documents
+                </p>
+              </Card>
+            </Link>
             
-            <Card variant="elevated" className="text-center p-6">
-              <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center mx-auto mb-4">
-                <FileText className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-semibold mb-2">Smart Classification</h3>
-              <p className="text-sm text-muted-foreground">
-                Automatically categorize and route documents to relevant departments
-              </p>
-            </Card>
+            <Link to="/login">
+              <Card variant="elevated" className="text-center p-6 hover:scale-105 transition-transform cursor-pointer">
+                <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <FileText className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-semibold mb-2">Smart Classification</h3>
+                <p className="text-sm text-muted-foreground">
+                  Automatically categorize and route documents to relevant departments
+                </p>
+              </Card>
+            </Link>
             
-            <Card variant="elevated" className="text-center p-6">
-              <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-semibold mb-2">Compliance Tracking</h3>
-              <p className="text-sm text-muted-foreground">
-                Monitor regulatory compliance and deadline management
-              </p>
-            </Card>
+            <Link to="/login">
+              <Card variant="elevated" className="text-center p-6 hover:scale-105 transition-transform cursor-pointer">
+                <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Shield className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-semibold mb-2">Compliance Tracking</h3>
+                <p className="text-sm text-muted-foreground">
+                  Monitor regulatory compliance and deadline management
+                </p>
+              </Card>
+            </Link>
             
-            <Card variant="elevated" className="text-center p-6">
-              <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Train className="h-6 w-6 text-white" />
-              </div>
-              <h3 className="font-semibold mb-2">Metro Operations</h3>
-              <p className="text-sm text-muted-foreground">
-                Specialized for railway operations and maintenance workflows
-              </p>
-            </Card>
+            <Link to="/login">
+              <Card variant="elevated" className="text-center p-6 hover:scale-105 transition-transform cursor-pointer">
+                <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center mx-auto mb-4">
+                  <Train className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="font-semibold mb-2">Metro Operations</h3>
+                <p className="text-sm text-muted-foreground">
+                  Specialized for railway operations and maintenance workflows
+                </p>
+              </Card>
+            </Link>
           </div>
         </div>
       </section>
