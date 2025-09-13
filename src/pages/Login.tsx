@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Train, ArrowLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import Footer from "@/components/Footer";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -41,96 +42,99 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Back to home */}
-        <Button variant="ghost" asChild className="mb-6">
-          <Link to="/" className="flex items-center gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Link>
-        </Button>
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/50 flex flex-col">
+      <div className="flex-1 flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          {/* Back to home */}
+          <Button variant="ghost" asChild className="mb-6">
+            <Link to="/" className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Home
+            </Link>
+          </Button>
 
-        <Card variant="elevated">
-          <CardHeader className="text-center">
-            <div className="flex justify-center mb-4">
-              <div className="p-3 rounded-xl bg-gradient-primary">
-                <Train className="h-8 w-8 text-white" />
+          <Card variant="elevated">
+            <CardHeader className="text-center">
+              <div className="flex justify-center mb-4">
+                <div className="p-3 rounded-xl bg-gradient-primary">
+                  <Train className="h-8 w-8 text-white" />
+                </div>
               </div>
-            </div>
-            <CardTitle className="text-2xl">Welcome back</CardTitle>
-            <CardDescription>
-              Sign in to your IntelliDocs AI account
-            </CardDescription>
-          </CardHeader>
-          
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="your.email@kmrl.org"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
+              <CardTitle className="text-2xl">Welcome back</CardTitle>
+              <CardDescription>
+                Sign in to your IntelliDocs AI account
+              </CardDescription>
+            </CardHeader>
+            
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="your.email@kmrl.org"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="role">Role</Label>
+                  <Select value={role} onValueChange={setRole} required>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="hr">Human Resources</SelectItem>
+                      <SelectItem value="engineering">Engineering</SelectItem>
+                      <SelectItem value="maintenance">Maintenance</SelectItem>
+                      <SelectItem value="legal">Legal</SelectItem>
+                      <SelectItem value="executive">Executive</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="flex items-center justify-between text-sm">
+                  <Link to="/forgot-password" className="text-primary hover:underline">
+                    Forgot password?
+                  </Link>
+                </div>
+                
+                <Button 
+                  type="submit" 
+                  variant="gradient" 
+                  className="w-full" 
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Signing in..." : "Sign In"}
+                </Button>
+              </form>
               
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="role">Role</Label>
-                <Select value={role} onValueChange={setRole} required>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select your role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="hr">Human Resources</SelectItem>
-                    <SelectItem value="engineering">Engineering</SelectItem>
-                    <SelectItem value="maintenance">Maintenance</SelectItem>
-                    <SelectItem value="legal">Legal</SelectItem>
-                    <SelectItem value="executive">Executive</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="flex items-center justify-between text-sm">
-                <Link to="/forgot-password" className="text-primary hover:underline">
-                  Forgot password?
+              <div className="mt-6 text-center text-sm">
+                <span className="text-muted-foreground">Don't have an account? </span>
+                <Link to="/register" className="text-primary hover:underline font-medium">
+                  Register here
                 </Link>
               </div>
-              
-              <Button 
-                type="submit" 
-                variant="gradient" 
-                className="w-full" 
-                disabled={isLoading}
-              >
-                {isLoading ? "Signing in..." : "Sign In"}
-              </Button>
-            </form>
-            
-            <div className="mt-6 text-center text-sm">
-              <span className="text-muted-foreground">Don't have an account? </span>
-              <Link to="/register" className="text-primary hover:underline font-medium">
-                Register here
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };

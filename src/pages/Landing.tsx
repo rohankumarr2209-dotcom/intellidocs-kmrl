@@ -4,6 +4,7 @@ import { Train, FileText, Brain, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/metro-hero-bg.jpg";
 import kmrlLogo from "@/assets/kmrl-logo.png";
+import Footer from "@/components/Footer";
 
 const Landing = () => {
   return (
@@ -153,27 +154,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border bg-card py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center gap-3 mb-4 md:mb-0">
-              <div className="p-2 rounded-lg bg-white">
-                <img src={kmrlLogo} alt="KMRL Logo" className="h-5 w-auto" />
-              </div>
-              <div>
-                <div className="font-semibold">IntelliDocs AI</div>
-                <div className="text-sm text-muted-foreground">© 2025 | Built for Smart India Hackathon</div>
-              </div>
-            </div>
-            <div className="flex gap-6 text-sm">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">About</a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">GitHub</a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Contact</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
