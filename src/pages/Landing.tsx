@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import heroImage from "@/assets/metro-hero-bg.jpg";
 import kmrlLogo from "@/assets/kmrl-logo.png";
 import Footer from "@/components/Footer";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Landing = () => {
   return (
@@ -22,6 +23,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <LanguageSwitcher />
             <Button variant="ghost" asChild>
               <Link to="/login">Login</Link>
             </Button>
