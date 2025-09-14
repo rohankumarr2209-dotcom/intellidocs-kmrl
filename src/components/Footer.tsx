@@ -43,7 +43,7 @@ const Footer = () => {
               <a href="#" className="w-10 h-10 bg-gradient-secondary rounded-full flex items-center justify-center hover:scale-110 transition-transform">
                 <Twitter className="h-5 w-5 text-white" />
               </a>
-              <a href="#" className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+              <a href="https://youtube.com/channel/UC7BTC-EO8XrT8Q4ODnNjenA" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center hover:scale-110 transition-transform">
                 <Youtube className="h-5 w-5 text-white" />
               </a>
             </div>
