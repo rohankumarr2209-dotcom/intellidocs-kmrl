@@ -6,8 +6,11 @@ import heroImage from "@/assets/metro-hero-bg.jpg";
 import kmrlLogo from "@/assets/kmrl-logo.png";
 import Footer from "@/components/Footer";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Landing = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation Header */}
@@ -18,17 +21,17 @@ const Landing = () => {
               <img src={kmrlLogo} alt="KMRL Logo" className="h-6 w-auto" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">IntelliDocs AI</h1>
-              <p className="text-xs text-muted-foreground">KMRL Smart Assistant</p>
+              <h1 className="text-xl font-bold text-foreground">{t('nav.title')}</h1>
+              <p className="text-xs text-muted-foreground">{t('nav.subtitle')}</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
             <Button variant="ghost" asChild>
-              <Link to="/login">Login</Link>
+              <Link to="/login">{t('nav.login')}</Link>
             </Button>
             <Button variant="gradient" asChild>
-              <Link to="/register">Get Started</Link>
+              <Link to="/register">{t('nav.getStarted')}</Link>
             </Button>
           </div>
         </div>
@@ -48,31 +51,30 @@ const Landing = () => {
             <div className="inline-flex items-center gap-2 bg-accent/50 backdrop-blur rounded-full px-4 py-2 mb-6">
               <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
               <span className="text-sm font-medium text-accent-foreground">
-                AI-Powered Document Intelligence
+                {t('hero.badge')}
               </span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               <span className="bg-gradient-hero bg-clip-text text-transparent">
-                IntelliDocs AI
+                {t('hero.title')}
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground mb-4">
-              Smart Document Assistant for KMRL
+              {t('hero.subtitle')}
             </p>
             
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              AI-powered platform to summarize, classify, and route operational documents 
-              for Kochi Metro Rail Limited. Streamline your document workflow with intelligent automation.
+              {t('hero.description')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button variant="hero" size="xl" asChild>
-                <Link to="/register">Start Free Trial</Link>
+                <Link to="/register">{t('hero.startTrial')}</Link>
               </Button>
               <Button variant="outline" size="xl" asChild>
-                <Link to="/login">Sign In</Link>
+                <Link to="/login">{t('hero.signIn')}</Link>
               </Button>
             </div>
           </div>
@@ -83,9 +85,9 @@ const Landing = () => {
       <section className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Intelligent Document Management</h2>
+            <h2 className="text-3xl font-bold mb-4">{t('features.title')}</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Transform how KMRL handles operational documents with AI-powered insights and automation
+              {t('features.description')}
             </p>
           </div>
           
@@ -95,9 +97,9 @@ const Landing = () => {
                 <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Brain className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="font-semibold mb-2">AI Summarization</h3>
+                <h3 className="font-semibold mb-2">{t('features.aiSummarization')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Instantly generate intelligent summaries of complex documents
+                  {t('features.aiSummarizationDesc')}
                 </p>
               </Card>
             </Link>
@@ -107,9 +109,9 @@ const Landing = () => {
                 <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center mx-auto mb-4">
                   <FileText className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="font-semibold mb-2">Smart Classification</h3>
+                <h3 className="font-semibold mb-2">{t('features.smartClassification')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Automatically categorize and route documents to relevant departments
+                  {t('features.smartClassificationDesc')}
                 </p>
               </Card>
             </Link>
@@ -119,9 +121,9 @@ const Landing = () => {
                 <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Shield className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="font-semibold mb-2">Compliance Tracking</h3>
+                <h3 className="font-semibold mb-2">{t('features.complianceTracking')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Monitor regulatory compliance and deadline management
+                  {t('features.complianceTrackingDesc')}
                 </p>
               </Card>
             </Link>
@@ -131,9 +133,9 @@ const Landing = () => {
                 <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center mx-auto mb-4">
                   <Train className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="font-semibold mb-2">Metro Operations</h3>
+                <h3 className="font-semibold mb-2">{t('features.metroOperations')}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Specialized for railway operations and maintenance workflows
+                  {t('features.metroOperationsDesc')}
                 </p>
               </Card>
             </Link>
@@ -145,13 +147,13 @@ const Landing = () => {
       <section className="py-20 bg-gradient-hero">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Transform Your Document Workflow?
+            {t('cta.title')}
           </h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Join KMRL teams already using IntelliDocs AI to streamline operations and improve efficiency
+            {t('cta.description')}
           </p>
           <Button variant="glass" size="xl" asChild>
-            <Link to="/register">Get Started Today</Link>
+            <Link to="/register">{t('cta.getStarted')}</Link>
           </Button>
         </div>
       </section>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,9 +6,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Languages, Globe } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const LanguageSwitcher = () => {
-  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const { language, setLanguage } = useLanguage();
 
   const languages = [
     { code: "en", name: "English", nativeName: "English" },
@@ -17,12 +17,10 @@ const LanguageSwitcher = () => {
   ];
 
   const handleLanguageChange = (languageCode: string) => {
-    setCurrentLanguage(languageCode);
-    // Here you would implement the actual language switching logic
-    console.log(`Switching to language: ${languageCode}`);
+    setLanguage(languageCode);
   };
 
-  const currentLang = languages.find(lang => lang.code === currentLanguage);
+  const currentLang = languages.find(lang => lang.code === language);
 
   return (
     <DropdownMenu>
@@ -33,20 +31,20 @@ const LanguageSwitcher = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[150px] bg-card border border-border shadow-lg">
-        {languages.map((language) => (
+        {languages.map((lang) => (
           <DropdownMenuItem
-            key={language.code}
-            onClick={() => handleLanguageChange(language.code)}
+            key={lang.code}
+            onClick={() => handleLanguageChange(lang.code)}
             className={`flex items-center gap-3 cursor-pointer ${
-              currentLanguage === language.code 
+              language === lang.code 
                 ? "bg-accent text-accent-foreground" 
                 : "hover:bg-accent/50"
             }`}
           >
             <Languages className="h-4 w-4" />
             <div className="flex flex-col">
-              <span className="font-medium">{language.nativeName}</span>
-              <span className="text-xs text-muted-foreground">{language.name}</span>
+              <span className="font-medium">{lang.nativeName}</span>
+              <span className="text-xs text-muted-foreground">{lang.name}</span>
             </div>
           </DropdownMenuItem>
         ))}

@@ -2,8 +2,11 @@ import { Facebook, Instagram, Linkedin, Twitter, Youtube, Mail, Phone, MapPin } 
 import { Link } from "react-router-dom";
 import kmrlLogo from "@/assets/kmrl-logo.png";
 import heroImage from "@/assets/metro-hero-bg.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+  
   return (
     <footer className="relative border-t border-border bg-card overflow-hidden">
       {/* Background Image */}
@@ -21,12 +24,12 @@ const Footer = () => {
                 <img src={kmrlLogo} alt="KMRL Logo" className="h-6 w-auto" />
               </div>
               <div>
-                <div className="font-bold text-lg">IntelliDocs AI</div>
-                <div className="text-sm text-muted-foreground">KMRL Smart Assistant</div>
+                <div className="font-bold text-lg">{t('nav.title')}</div>
+                <div className="text-sm text-muted-foreground">{t('nav.subtitle')}</div>
               </div>
             </div>
             <p className="text-sm text-muted-foreground mb-6">
-              AI-powered document intelligence platform designed specifically for Kochi Metro Rail Limited operations and management.
+              {t('footer.description')}
             </p>
             
             {/* Social Media Icons */}
@@ -51,37 +54,38 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
+            <h3 className="font-semibold mb-4">{t('footer.quickLinks')}</h3>
             <div className="space-y-2">
-              <Link to="/" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Home</Link>
-              <Link to="/login" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Login</Link>
-              <Link to="/register" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Register</Link>
-              <Link to="/dashboard" className="block text-sm text-muted-foreground hover:text-primary transition-colors">Dashboard</Link>
+              <Link to="/" className="block text-sm text-muted-foreground hover:text-primary transition-colors">{t('footer.home')}</Link>
+              <Link to="/login" className="block text-sm text-muted-foreground hover:text-primary transition-colors">{t('footer.login')}</Link>
+              <Link to="/register" className="block text-sm text-muted-foreground hover:text-primary transition-colors">{t('footer.register')}</Link>
+              <Link to="/dashboard" className="block text-sm text-muted-foreground hover:text-primary transition-colors">{t('footer.dashboard')}</Link>
             </div>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="font-semibold mb-4">Services</h3>
+            <h3 className="font-semibold mb-4">{t('footer.services')}</h3>
             <div className="space-y-2">
-              <div className="text-sm text-muted-foreground">AI Summarization</div>
-              <div className="text-sm text-muted-foreground">Smart Classification</div>
-              <div className="text-sm text-muted-foreground">Compliance Tracking</div>
-              <div className="text-sm text-muted-foreground">Metro Operations</div>
+              <div className="text-sm text-muted-foreground">{t('footer.aiSummarization')}</div>
+              <div className="text-sm text-muted-foreground">{t('footer.smartClassification')}</div>
+              <div className="text-sm text-muted-foreground">{t('footer.complianceTracking')}</div>
+              <div className="text-sm text-muted-foreground">{t('footer.metroOperations')}</div>
             </div>
           </div>
 
           {/* Contact Details */}
           <div>
-            <h3 className="font-semibold mb-4">Contact Info</h3>
+            <h3 className="font-semibold mb-4">{t('footer.contactInfo')}</h3>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
                   <MapPin className="h-4 w-4 text-accent-foreground" />
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  KMRL Corporate Office<br />
-                  Kochi Metro, Kerala, India
+                  {t('footer.address').split('\n').map((line, index) => (
+                    <div key={index}>{line}</div>
+                  ))}
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -89,7 +93,7 @@ const Footer = () => {
                   <Phone className="h-4 w-4 text-accent-foreground" />
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  +91 484 123 4567
+                  {t('footer.phone')}
                 </div>
               </div>
               <div className="flex items-center gap-3">
@@ -97,7 +101,7 @@ const Footer = () => {
                   <Mail className="h-4 w-4 text-accent-foreground" />
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  info@intellidocs.kmrl.in
+                  {t('footer.email')}
                 </div>
               </div>
             </div>
@@ -107,12 +111,12 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © 2025 IntelliDocs AI | Built for Smart India Hackathon | Powered by KMRL
+            {t('footer.copyright')}
           </div>
           <div className="flex gap-6 text-sm">
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Support</a>
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.privacyPolicy')}</a>
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.termsOfService')}</a>
+            <a href="#" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.support')}</a>
           </div>
         </div>
       </div>
