@@ -41,11 +41,8 @@ const Landing = () => {
           </div>
           <div className="flex items-center gap-3">
             <LanguageSwitcher />
-            <Button variant="ghost" asChild>
-              <Link to="/login">{t('nav.login')}</Link>
-            </Button>
             <Button variant="gradient" asChild>
-              <Link to="/register">{t('nav.getStarted')}</Link>
+              <Link to="/login">{t('nav.login')}</Link>
             </Button>
           </div>
         </div>
@@ -87,11 +84,8 @@ const Landing = () => {
               {t('hero.description')}
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex justify-center">
               <Button variant="hero" size="xl" asChild>
-                <Link to="/register">{t('hero.startTrial')}</Link>
-              </Button>
-              <Button variant="outline" size="xl" asChild>
                 <Link to="/login">{t('hero.signIn')}</Link>
               </Button>
             </div>
@@ -188,7 +182,7 @@ const Landing = () => {
                 {t('cta.description')}
               </p>
               <Button variant="gradient" size="xl" asChild>
-                <Link to="/register">{t('cta.getStarted')}</Link>
+                <Link to="/login">{t('cta.getStarted')}</Link>
               </Button>
             </div>
           </div>

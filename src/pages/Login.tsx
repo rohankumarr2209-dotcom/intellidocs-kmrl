@@ -3,24 +3,23 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import Footer from "@/components/Footer";
 import kmrlLogo from "@/assets/kmrl-logo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password || !role) {
+    if (!email || !password) {
       toast({
         title: "Missing Information",
         description: "Please fill in all fields",
@@ -30,16 +29,71 @@ const Login = () => {
     }
 
     setIsLoading(true);
-    
-    // Simulate login process
-    setTimeout(() => {
-      toast({
-        title: "Login Successful",
-        description: `Welcome back! Redirecting to dashboard...`,
+
+    try {
+      // First check if user is in approved users list
+      const { data: approvedUser, error: approvedError } = await supabase
+        .from('approved_users')
+        .select('*')
+        .eq('email', email)
+        .eq('is_active', true)
+        .maybeSingle();
+
+      if (approvedError) {
+        throw approvedError;
+      }
+
+      if (!approvedUser) {
+        toast({
+          title: "Access Denied",
+          description: "You are not authorized to access this system. Please contact your administrator.",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      // Try to sign in with Supabase Auth
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
-      navigate("/dashboard");
+
+      if (error) {
+        if (error.message.includes('Invalid login credentials')) {
+          toast({
+            title: "Login Failed",
+            description: "Invalid email or password. Please try again.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Login Failed",
+            description: error.message,
+            variant: "destructive",
+          });
+        }
+        setIsLoading(false);
+        return;
+      }
+
+      if (data.user) {
+        toast({
+          title: "Login Successful",
+          description: `Welcome back, ${approvedUser.full_name}!`,
+        });
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast({
+        title: "Login Failed",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsLoading(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -63,7 +117,7 @@ const Login = () => {
               </div>
               <CardTitle className="text-2xl">Welcome back</CardTitle>
               <CardDescription>
-                Sign in to your IntelliDocs AI account
+                Sign in to your IntelliDocs AI account (Authorized personnel only)
               </CardDescription>
             </CardHeader>
             
@@ -93,28 +147,6 @@ const Login = () => {
                   />
                 </div>
                 
-                <div className="space-y-2">
-                  <Label htmlFor="role">Role</Label>
-                  <Select value={role} onValueChange={setRole} required>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your role" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="hr">Human Resources</SelectItem>
-                      <SelectItem value="engineering">Engineering</SelectItem>
-                      <SelectItem value="maintenance">Maintenance</SelectItem>
-                      <SelectItem value="legal">Legal</SelectItem>
-                      <SelectItem value="executive">Executive</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                
-                <div className="flex items-center justify-between text-sm">
-                  <Link to="/forgot-password" className="text-primary hover:underline">
-                    Forgot password?
-                  </Link>
-                </div>
-                
                 <Button 
                   type="submit" 
                   variant="gradient" 
@@ -125,11 +157,8 @@ const Login = () => {
                 </Button>
               </form>
               
-              <div className="mt-6 text-center text-sm">
-                <span className="text-muted-foreground">Don't have an account? </span>
-                <Link to="/register" className="text-primary hover:underline font-medium">
-                  Register here
-                </Link>
+              <div className="mt-6 text-center text-sm text-muted-foreground">
+                Access restricted to authorized KMRL personnel only
               </div>
             </CardContent>
           </Card>
