@@ -2,7 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Train, FileText, Brain, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import heroImage from "@/assets/metro-hero-bg.jpg";
+import metro1 from "@/assets/metro-1.jpg";
+import metro2 from "@/assets/metro-2.jpg";
+import metro3 from "@/assets/metro-3.jpg";
+import metro4 from "@/assets/metro-4.jpg";
 import kmrlLogo from "@/assets/kmrl-logo.png";
 import Footer from "@/components/Footer";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -10,6 +15,15 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const Landing = () => {
   const { t } = useLanguage();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const images = [metro1, metro2, metro3, metro4];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [images.length]);
   
   return (
     <div className="min-h-screen bg-background">
@@ -39,13 +53,17 @@ const Landing = () => {
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-background to-muted/50 py-20">
-        <div 
-          className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat animate-pulse"
-          style={{ 
-            backgroundImage: `url(${heroImage})`,
-            animation: 'float 6s ease-in-out infinite'
-          }}
-        />
+        <div className="absolute inset-0">
+          {images.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
+                index === currentImageIndex ? 'opacity-30' : 'opacity-0'
+              }`}
+              style={{ backgroundImage: `url(${image})` }}
+            />
+          ))}
+        </div>
         <div className="relative container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 bg-accent/50 backdrop-blur rounded-full px-4 py-2 mb-6">
