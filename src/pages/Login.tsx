@@ -4,10 +4,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Train, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import Footer from "@/components/Footer";
+import kmrlLogo from "@/assets/kmrl-logo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -56,8 +57,8 @@ const Login = () => {
           <Card variant="elevated">
             <CardHeader className="text-center">
               <div className="flex justify-center mb-4">
-                <div className="p-3 rounded-xl bg-gradient-primary">
-                  <Train className="h-8 w-8 text-white" />
+                <div className="p-3 rounded-xl bg-white">
+                  <img src={kmrlLogo} alt="KMRL Logo" className="h-8 w-auto" />
                 </div>
               </div>
               <CardTitle className="text-2xl">Welcome back</CardTitle>
