@@ -162,17 +162,36 @@ const Landing = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-hero">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            {t('cta.title')}
-          </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            {t('cta.description')}
-          </p>
-          <Button variant="glass" size="xl" asChild>
-            <Link to="/register">{t('cta.getStarted')}</Link>
-          </Button>
+      <section className="py-20 bg-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* YouTube Video */}
+            <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/qmd699rPwn0"
+                title="Kochi Metro Official"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            </div>
+            
+            {/* Content */}
+            <div className="space-y-6">
+              <h2 className="text-3xl font-bold text-foreground">
+                {t('cta.title')}
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                {t('cta.description')}
+              </p>
+              <Button variant="gradient" size="xl" asChild>
+                <Link to="/register">{t('cta.getStarted')}</Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
