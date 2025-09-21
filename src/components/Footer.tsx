@@ -58,7 +58,7 @@ const Footer = () => {
             <div className="space-y-2">
               <Link to="/" className="block text-sm text-muted-foreground hover:text-primary transition-colors">{t('footer.home')}</Link>
               <Link to="/login" className="block text-sm text-muted-foreground hover:text-primary transition-colors">{t('footer.login')}</Link>
-              <Link to="/register" className="block text-sm text-muted-foreground hover:text-primary transition-colors">{t('footer.register')}</Link>
+              
               <Link to="/dashboard" className="block text-sm text-muted-foreground hover:text-primary transition-colors">{t('footer.dashboard')}</Link>
             </div>
           </div>
