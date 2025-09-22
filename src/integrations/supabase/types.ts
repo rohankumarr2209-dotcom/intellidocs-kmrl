@@ -47,6 +47,57 @@ export type Database = {
         }
         Relationships: []
       }
+      documents: {
+        Row: {
+          ai_summary: string | null
+          category: string
+          content_type: string | null
+          created_at: string
+          department: string | null
+          file_name: string
+          file_path: string | null
+          file_size: number | null
+          id: string
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ai_summary?: string | null
+          category: string
+          content_type?: string | null
+          created_at?: string
+          department?: string | null
+          file_name: string
+          file_path?: string | null
+          file_size?: number | null
+          id?: string
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ai_summary?: string | null
+          category?: string
+          content_type?: string | null
+          created_at?: string
+          department?: string | null
+          file_name?: string
+          file_path?: string | null
+          file_size?: number | null
+          id?: string
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
