@@ -1,4 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { User, Session } from "@supabase/supabase-js";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +12,7 @@ import {
   FileText, 
   Bell, 
   Search, 
-  User, 
+  User as UserIcon, 
   LogOut, 
   Download,
   Eye,
@@ -79,8 +81,63 @@ const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [dragActive, setDragActive] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [userProfile, setUserProfile] = useState<any>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { t } = useLanguage();
+
+  // Authentication state management
+  useEffect(() => {
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        // Fetch user profile when user is authenticated
+        if (session?.user) {
+          setTimeout(() => {
+            fetchUserProfile(session.user.email);
+          }, 0);
+        } else {
+          setUserProfile(null);
+        }
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchUserProfile(session.user.email);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const fetchUserProfile = async (email: string | undefined) => {
+    if (!email) return;
+    
+    try {
+      const { data, error } = await supabase
+        .from('approved_users')
+        .select('*')
+        .eq('email', email)
+        .single();
+      
+      if (error) {
+        console.error('Error fetching user profile:', error);
+        return;
+      }
+      
+      setUserProfile(data);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
 
   const getStatusColor = (status: string) => {
     return status === "New" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground";
@@ -184,7 +241,7 @@ const Dashboard = () => {
           <div className="p-4 border-t border-border">
             <div className="flex items-center gap-3 px-3 py-2">
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                <User className="h-4 w-4 text-primary-foreground" />
+                <UserIcon className="h-4 w-4 text-primary-foreground" />
               </div>
               <div className="flex-1">
                 <p className="text-sm font-medium">John Doe</p>
@@ -259,7 +316,9 @@ const Dashboard = () => {
           <div className="p-6 space-y-6">
             {/* Welcome Section */}
             <div className="mb-8">
-              <h2 className="text-3xl font-bold text-foreground mb-2">Welcome back, John!</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-2">
+                Welcome back, {userProfile?.full_name || user?.email?.split('@')[0] || 'User'}!
+              </h2>
               <p className="text-muted-foreground">Here's what's happening with your documents today.</p>
             </div>
 
